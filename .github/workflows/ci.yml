@@ -112,4 +112,4 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ACCESS_TOKEN_EXPIRE_MINUTES: "60"
         run: |
-          pytest tests/test_auth.py tests/test_users.py -v --tb=short
+          pytest tests/test_auth.py tests/test_users.py tests/test_data.py -v --tb=short
