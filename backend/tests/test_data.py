@@ -1,6 +1,4 @@
 """TC-DATA-001 ~ TC-DATA-015"""
-import io
-import pytest
 from httpx import AsyncClient
 
 

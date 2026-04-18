@@ -1,5 +1,4 @@
 """TC-AUTH-001 ~ TC-AUTH-009"""
-import pytest
 from httpx import AsyncClient
 
 

@@ -32,5 +32,5 @@ class User(Base):
         nullable=False,
     )
 
-    data_records: Mapped[list["DataRecord"]] = relationship("DataRecord", back_populates="creator")
-    system_logs: Mapped[list["SystemLog"]] = relationship("SystemLog", back_populates="user")
+    data_records: Mapped[list["DataRecord"]] = relationship("DataRecord", back_populates="creator")  # noqa: F821
+    system_logs: Mapped[list["SystemLog"]] = relationship("SystemLog", back_populates="user")  # noqa: F821

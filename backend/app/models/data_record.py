@@ -31,4 +31,4 @@ class DataRecord(Base):
         nullable=False,
     )
 
-    creator: Mapped["User"] = relationship("User", back_populates="data_records")
+    creator: Mapped["User"] = relationship("User", back_populates="data_records")  # noqa: F821

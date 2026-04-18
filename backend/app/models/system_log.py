@@ -19,4 +19,4 @@ class SystemLog(Base):
         DateTime, default=lambda: datetime.now(timezone.utc), nullable=False, index=True
     )
 
-    user: Mapped["User"] = relationship("User", back_populates="system_logs")
+    user: Mapped["User"] = relationship("User", back_populates="system_logs")  # noqa: F821
