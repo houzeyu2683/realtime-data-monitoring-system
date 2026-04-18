@@ -69,14 +69,15 @@ jobs:
     name: Integration Test (pytest)
     runs-on: ubuntu-latest
     needs: [build-backend, build-frontend]
+    environment: develop
     services:
       db:
         image: mariadb:11.7
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.TEST_DB_ROOT_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
           MYSQL_DATABASE: monitoring_db
           MYSQL_USER: monitor_user
-          MYSQL_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+          MYSQL_PASSWORD: ${{ secrets.DB_PASSWORD }}
         ports:
           - 3306:3306
         options: >-
@@ -100,15 +101,15 @@ jobs:
 
       - name: Create test database
         run: |
-          mysql -h 127.0.0.1 -u root -p${{ secrets.TEST_DB_ROOT_PASSWORD }} -e \
+          mysql -h 127.0.0.1 -u root -p${{ secrets.DB_ROOT_PASSWORD }} -e \
             "CREATE DATABASE IF NOT EXISTS monitoring_test; \
              GRANT ALL ON monitoring_test.* TO 'monitor_user'@'%';"
 
       - name: Run pytest
         working-directory: backend
         env:
-          DATABASE_URL: mysql+asyncmy://monitor_user:${{ secrets.TEST_DB_PASSWORD }}@localhost:3306/monitoring_db
-          SECRET_KEY: ${{ secrets.TEST_SECRET_KEY }}
+          DATABASE_URL: mysql+asyncmy://monitor_user:${{ secrets.DB_PASSWORD }}@localhost:3306/monitoring_db
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ACCESS_TOKEN_EXPIRE_MINUTES: "60"
         run: |
           pytest tests/ -v --cov=app --cov-report=term-missing
