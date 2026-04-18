@@ -1,0 +1,21 @@
+title,value,category,description,threshold,timestamp
+Temperature Sensor A,72.5,temperature,Server room temperature,80.0,2026-04-18T08:00:00
+Humidity Sensor B,65.3,humidity,Data center humidity,90.0,2026-04-18T08:01:00
+CPU Load Server1,45.2,cpu_load,Primary web server CPU,85.0,2026-04-18T08:02:00
+Memory Usage DB,78.9,memory_usage,Database server memory,90.0,2026-04-18T08:03:00
+Network IO Router1,320.5,network_io,Core router throughput Mbps,950.0,2026-04-18T08:04:00
+Pressure Gauge P1,1012.3,pressure,Atmospheric pressure hPa,,2026-04-18T08:05:00
+Temperature Sensor A,85.1,temperature,Server room temperature,80.0,2026-04-18T08:06:00
+CPU Load Server2,92.7,cpu_load,Secondary app server CPU,85.0,2026-04-18T08:07:00
+Humidity Sensor B,55.0,humidity,Data center humidity,90.0,2026-04-18T08:08:00
+Memory Usage App,60.4,memory_usage,App server memory,90.0,2026-04-18T08:09:00
+Network IO Switch1,150.8,network_io,Core switch throughput Mbps,950.0,2026-04-18T08:10:00
+Temperature Sensor C,35.2,temperature,Office temperature,80.0,2026-04-18T08:11:00
+CPU Load Server1,55.9,cpu_load,Primary web server CPU,85.0,2026-04-18T08:12:00
+Pressure Gauge P2,1015.0,pressure,Secondary pressure gauge,,2026-04-18T08:13:00
+Memory Usage Cache,88.3,memory_usage,Cache server memory,90.0,2026-04-18T08:14:00
+Network IO Router1,980.1,network_io,Core router throughput Mbps,950.0,2026-04-18T08:15:00
+Temperature Sensor A,76.4,temperature,Server room temperature,80.0,2026-04-18T08:16:00
+CPU Load Server3,30.1,cpu_load,Backup server CPU,85.0,2026-04-18T08:17:00
+Humidity Sensor C,72.5,humidity,Storage room humidity,90.0,2026-04-18T08:18:00
+Memory Usage DB,91.2,memory_usage,Database server memory,90.0,2026-04-18T08:19:00

@@ -1,0 +1,64 @@
+services:
+  db:
+    image: mariadb:11.7
+    container_name: monitoring_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - monitoring_net
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: monitoring_backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - monitoring_net
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: monitoring_frontend
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    networks:
+      - monitoring_net
+    volumes:
+      - ./frontend:/app
+
+volumes:
+  db_data:
+
+networks:
+  monitoring_net:
+    driver: bridge
