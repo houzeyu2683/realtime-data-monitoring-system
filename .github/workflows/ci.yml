@@ -99,6 +99,9 @@ jobs:
       - name: Install backend dependencies
         run: pip install -r backend/requirements.txt
 
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y default-mysql-client
+
       - name: Create test database
         run: |
           mysql -h 127.0.0.1 -u root -p${{ secrets.DB_ROOT_PASSWORD }} -e \
@@ -112,4 +115,4 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ACCESS_TOKEN_EXPIRE_MINUTES: "60"
         run: |
-          pytest tests/test_auth.py tests/test_users.py tests/test_data.py -v --tb=short
+          pytest tests/test_auth.py tests/test_users.py tests/test_data.py tests/test_analytics.py tests/test_admin.py tests/test_websocket.py -v --tb=short

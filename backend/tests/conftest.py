@@ -1,6 +1,7 @@
 import pytest
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
+from httpx_ws.transport import ASGIWebSocketTransport
 from sqlalchemy.pool import NullPool
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
@@ -46,6 +47,18 @@ async def client(session_factory) -> AsyncClient:
 
     app.dependency_overrides[get_db] = _override
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as c:
+        yield c
+    app.dependency_overrides.clear()
+
+
+@pytest_asyncio.fixture
+async def ws_client(session_factory) -> AsyncClient:
+    async def _override():
+        async with session_factory() as session:
+            yield session
+
+    app.dependency_overrides[get_db] = _override
+    async with AsyncClient(transport=ASGIWebSocketTransport(app=app), base_url="ws://test") as c:
         yield c
     app.dependency_overrides.clear()
 

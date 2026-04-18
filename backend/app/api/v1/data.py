@@ -102,7 +102,7 @@ async def import_csv(
     db: Annotated[AsyncSession, Depends(get_db)],
 ) -> dict:
     content = await file.read()
-    df = pd.read_csv(io.BytesIO(content))
+    df = pd.read_csv(io.BytesIO(content), keep_default_na=False)
     records_data = df.to_dict(orient="records")
     count = await data_service.bulk_create_records(db, records_data, current_user.id, source="csv")
     return {"imported": count}

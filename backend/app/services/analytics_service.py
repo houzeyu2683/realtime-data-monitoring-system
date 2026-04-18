@@ -24,7 +24,6 @@ async def get_summary(
             func.avg(DataRecord.value).label("avg_value"),
             func.max(DataRecord.value).label("max_value"),
             func.min(DataRecord.value).label("min_value"),
-            func.sum(DataRecord.is_anomaly.cast(db.bind.dialect.INTEGER if hasattr(db, 'bind') else func.count())).label("anomaly_count"),
         ).where(where_clause)
     )
     row = result.one()
