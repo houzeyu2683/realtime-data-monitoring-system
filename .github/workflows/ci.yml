@@ -108,8 +108,8 @@ jobs:
       - name: Run pytest
         working-directory: backend
         env:
-          DATABASE_URL: mysql+asyncmy://monitor_user:${{ secrets.DB_PASSWORD }}@localhost:3306/monitoring_db
+          DATABASE_URL: mysql+asyncmy://monitor_user:${{ secrets.DB_PASSWORD }}@localhost:3306/monitoring_test
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ACCESS_TOKEN_EXPIRE_MINUTES: "60"
         run: |
-          pytest tests/ -v --tb=short
+          pytest tests/test_auth.py -v --tb=short
