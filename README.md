@@ -1,10 +1,10 @@
-# 即時資料分析與監控系統
+# Real-Time Data Analysis & Monitoring System
 
-即時資料分析與監控系統，支援 WebSocket 即時推送、JWT 認證、角色權限管理與資料視覺化。
+A real-time data analysis and monitoring system with WebSocket push, JWT authentication, role-based access control, and data visualization.
 
-## 系統架構
+## Architecture
 
-詳細架構圖請見 [docs/architecture.md](docs/architecture.md)
+See [docs/architecture.md](docs/architecture.md) for detailed diagrams.
 
 ```mermaid
 graph LR
@@ -17,110 +17,110 @@ graph LR
     BE -->|asyncmy / ORM| DB
 ```
 
-## 技術棧
+## Tech Stack
 
-| 層級 | 技術 |
-|------|------|
-| 前端 | Streamlit 1.41, Plotly |
-| 後端 | FastAPI 0.115, Uvicorn, WebSocket |
-| 認證 | JWT (python-jose), bcrypt |
+| Layer | Technology |
+|-------|------------|
+| Frontend | Streamlit 1.41, Plotly |
+| Backend | FastAPI 0.115, Uvicorn, WebSocket |
+| Auth | JWT (python-jose), bcrypt |
 | ORM | SQLAlchemy 2.0 (async) |
-| 資料庫 | MariaDB 11.7 + asyncmy |
-| 遷移 | Alembic |
-| 容器化 | Docker + Docker Compose |
+| Database | MariaDB 11.7 + asyncmy |
+| Migration | Alembic |
+| Container | Docker + Docker Compose |
 | CI/CD | GitHub Actions |
 
-## 快速開始（本地）
+## Quick Start
 
-### 前置需求
+### Prerequisites
 
 - Docker & Docker Compose
 - Git
 
-### 1. Clone 專案
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/houzeyu2683/realtime-data-monitoring-system.git
 cd realtime-data-monitoring-system
 ```
 
-### 2. 設定環境變數
+### 2. Configure environment variables
 
 ```bash
 cp .env.example .env
-# 編輯 .env，修改 SECRET_KEY 等敏感設定
+# Edit .env and update SECRET_KEY and other sensitive values
 ```
 
-### 3. 啟動服務
+### 3. Start services
 
 ```bash
 docker compose up -d
 ```
 
-### 4. 開啟瀏覽器
+### 4. Open in browser
 
-- 前端：http://localhost:8501
-- API 文件：http://localhost:8000/docs
+- Frontend: http://localhost:8501
+- API Docs: http://localhost:8000/docs
 
-## 測試帳號
+## Test Account
 
-| 帳號 | 密碼 | 角色 |
-|------|------|------|
+| Username | Password | Role |
+|----------|----------|------|
 | admin | admin1234 | Admin |
 
-首次啟動會自動建立 admin 帳號。其他帳號可透過前端「註冊」頁面建立。
+The admin account is created automatically on first startup. Additional accounts can be registered via the frontend.
 
-## Docker 部署指令
+## Docker Commands
 
 ```bash
-# 啟動
+# Start
 docker compose up -d
 
-# 查看日誌
+# View logs
 docker compose logs -f backend
 
-# 停止
+# Stop
 docker compose down
 
-# 停止並清除資料
+# Stop and remove data
 docker compose down -v
 ```
 
-## API 文件
+## API Documentation
 
-啟動後訪問：http://localhost:8000/docs（Swagger UI）
+Visit http://localhost:8000/docs (Swagger UI) after startup.
 
-主要端點：
+Key endpoints:
 
-| 方法 | 路徑 | 說明 |
-|------|------|------|
-| POST | /api/v1/auth/register | 使用者註冊 |
-| POST | /api/v1/auth/login | 登入取得 Token |
-| GET | /api/v1/data/ | 資料列表（分頁/篩選/排序）|
-| POST | /api/v1/data/ | 建立資料記錄 |
-| POST | /api/v1/data/import/csv | 批量 CSV 導入 |
-| GET | /api/v1/analytics/ | 統計分析 |
-| GET | /api/v1/analytics/export/excel | 匯出 Excel |
-| WS | /ws?token=<jwt> | WebSocket 即時資料 |
-| DELETE | /api/v1/users/{id} | 刪除使用者（Admin）|
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | /api/v1/auth/register | Register a new user |
+| POST | /api/v1/auth/login | Login and get JWT token |
+| GET | /api/v1/data/ | List records (pagination / filter / sort) |
+| POST | /api/v1/data/ | Create a data record |
+| POST | /api/v1/data/import/csv | Bulk import via CSV |
+| GET | /api/v1/analytics/ | Statistical analytics |
+| GET | /api/v1/analytics/export/excel | Export data as Excel |
+| WS | /ws?token=\<jwt\> | WebSocket real-time data stream |
+| DELETE | /api/v1/users/{id} | Delete a user (Admin only) |
 
-## 功能模組
+## Features
 
-1. **使用者管理** - 註冊、登入、三種角色（Admin/User/Viewer）
-2. **資料管理** - CRUD、分頁篩選排序、CSV/JSON 批量導入
-3. **即時監控** - WebSocket 每秒推送模擬資料、折線圖、異常標記
-4. **資料分析** - 統計摘要、趨勢圖、分類聚合、Excel 匯出
-5. **系統管理** - 使用者管理、系統日誌、資料庫狀態（Admin 專用）
+1. **User Management** — Registration, login, three roles (Admin / User / Viewer), role-based permissions
+2. **Data Management** — CRUD, pagination, filtering, sorting, CSV/JSON bulk import
+3. **Real-Time Monitoring** — WebSocket push every second, live line chart, anomaly markers
+4. **Data Analytics** — Statistical summary, trend chart, category aggregation, Excel export
+5. **System Administration** — User management, system logs, database status (Admin only)
 
-## 測試資料
+## Sample Data
 
-使用 `sample_data.csv` 匯入範例資料：
+Import sample data via the frontend:
 
-1. 登入後進入「資料管理」頁面
-2. 選擇「批量導入」Tab
-3. 上傳 `sample_data.csv`
+1. Log in and go to the **Data** page
+2. Select the **Bulk Import** tab
+3. Upload `sample_data.csv`
 
-重新產生測試資料：
+To regenerate sample data:
 
 ```bash
 python scripts/generate_sample_data.py
