@@ -37,8 +37,8 @@
 ### 1. Clone 專案
 
 ```bash
-git clone <your-repo-url>
-cd RealTime-Data-Monitoring-System
+git clone https://github.com/houzeyu2683/realtime-data-monitoring-system.git
+cd realtime-data-monitoring-system
 ```
 
 ### 2. 設定環境變數
@@ -99,6 +99,7 @@ docker compose down -v
 | GET | /api/v1/analytics/ | 統計分析 |
 | GET | /api/v1/analytics/export/excel | 匯出 Excel |
 | WS | /ws?token=<jwt> | WebSocket 即時資料 |
+| DELETE | /api/v1/users/{id} | 刪除使用者（Admin）|
 
 ## 功能模組
 
@@ -115,3 +116,9 @@ docker compose down -v
 1. 登入後進入「資料管理」頁面
 2. 選擇「批量導入」Tab
 3. 上傳 `sample_data.csv`
+
+重新產生測試資料：
+
+```bash
+python scripts/generate_sample_data.py
+```
