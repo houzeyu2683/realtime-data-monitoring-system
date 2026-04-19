@@ -23,7 +23,7 @@ async def get_analytics(
     start_time: Optional[datetime] = None,
     end_time: Optional[datetime] = None,
     category: Optional[str] = None,
-    trend_interval: str = Query("hour", pattern="^(hour|day)$"),
+    trend_interval: str = Query("hour", pattern="^(minute|hour|day)$"),
 ) -> AnalyticsResponse:
     summary = await analytics_service.get_summary(db, start_time, end_time, category)
     categories = await analytics_service.get_category_aggregation(db, start_time, end_time)

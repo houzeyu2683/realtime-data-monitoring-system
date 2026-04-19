@@ -21,8 +21,10 @@ class CategoryAggregation(BaseModel):
 
 class TrendPoint(BaseModel):
     timestamp: datetime
+    category: str
     avg_value: float
     count: int
+    anomaly_count: int
 
 
 class AnalyticsResponse(BaseModel):

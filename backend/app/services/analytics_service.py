@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import and_, func, select
+from sqlalchemy import Integer, and_, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.data_record import DataRecord
@@ -85,7 +85,9 @@ async def get_trend(
     filters = _build_filters(start_time, end_time, category)
     where_clause = and_(*filters) if filters else True
 
-    if interval == "hour":
+    if interval == "minute":
+        trunc_expr = func.date_format(DataRecord.timestamp, "%Y-%m-%d %H:%i:00")
+    elif interval == "hour":
         trunc_expr = func.date_format(DataRecord.timestamp, "%Y-%m-%d %H:00:00")
     elif interval == "day":
         trunc_expr = func.date_format(DataRecord.timestamp, "%Y-%m-%d 00:00:00")
@@ -95,18 +97,22 @@ async def get_trend(
     result = await db.execute(
         select(
             trunc_expr.label("period"),
+            DataRecord.category,
             func.avg(DataRecord.value).label("avg_value"),
             func.count().label("count"),
+            func.sum(DataRecord.is_anomaly.cast(Integer)).label("anomaly_count"),
         )
         .where(where_clause)
-        .group_by("period")
-        .order_by("period")
+        .group_by("period", DataRecord.category)
+        .order_by("period", DataRecord.category)
     )
     return [
         TrendPoint(
             timestamp=datetime.fromisoformat(row.period),
+            category=row.category,
             avg_value=float(row.avg_value or 0),
             count=row.count,
+            anomaly_count=int(row.anomaly_count or 0),
         )
         for row in result.all()
     ]

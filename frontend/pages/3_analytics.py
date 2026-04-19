@@ -19,8 +19,10 @@ with st.sidebar:
     st.subheader("篩選條件")
     start_date = st.date_input("開始日期", value=datetime.today() - timedelta(days=7))
     end_date = st.date_input("結束日期", value=datetime.today())
-    category_filter = st.text_input("分類（空白=全部）")
-    interval = st.selectbox("趨勢區間", ["hour", "day"])
+    category_options = ["全部", "temperature", "humidity", "pressure", "cpu_load", "memory_usage", "network_io", "custom"]
+    category_sel = st.selectbox("分類", category_options)
+    category_filter = "" if category_sel == "全部" else category_sel
+    interval = st.selectbox("趨勢區間", ["minute", "hour", "day"])
     apply = st.button("套用")
 
 params: dict = {
@@ -51,7 +53,14 @@ try:
     with col_left:
         if trend:
             trend_df = pd.DataFrame(trend)
-            fig = px.line(trend_df, x="timestamp", y="avg_value", title="數值趨勢（平均）")
+            fig = px.line(trend_df, x="timestamp", y="avg_value", color="category", markers=True, title="各分類數值趨勢（平均）")
+            anomaly_df = trend_df[trend_df["anomaly_count"] > 0]
+            if not anomaly_df.empty:
+                fig.add_scatter(
+                    x=anomaly_df["timestamp"], y=anomaly_df["avg_value"],
+                    mode="markers", marker=dict(color="red", size=12, symbol="x"),
+                    name="異常", showlegend=True,
+                )
             st.plotly_chart(fig, use_container_width=True)
         else:
             st.info("無趨勢資料")

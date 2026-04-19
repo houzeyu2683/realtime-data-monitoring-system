@@ -42,7 +42,7 @@ with tab_list:
 
         if items:
             df = pd.DataFrame(items)
-            display_cols = ["id", "title", "value", "category", "is_anomaly", "source", "timestamp"]
+            display_cols = ["id", "title", "value", "category", "threshold", "is_anomaly", "source", "timestamp"]
             st.dataframe(df[display_cols], use_container_width=True)
 
             if can_edit:

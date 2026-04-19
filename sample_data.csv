@@ -1,21 +1,121 @@
 title,value,category,description,threshold,timestamp
-Temperature Sensor A,72.5,temperature,Server room temperature,80.0,2026-04-18T08:00:00
-Humidity Sensor B,65.3,humidity,Data center humidity,90.0,2026-04-18T08:01:00
-CPU Load Server1,45.2,cpu_load,Primary web server CPU,85.0,2026-04-18T08:02:00
-Memory Usage DB,78.9,memory_usage,Database server memory,90.0,2026-04-18T08:03:00
-Network IO Router1,320.5,network_io,Core router throughput Mbps,950.0,2026-04-18T08:04:00
-Pressure Gauge P1,1012.3,pressure,Atmospheric pressure hPa,,2026-04-18T08:05:00
-Temperature Sensor A,85.1,temperature,Server room temperature,80.0,2026-04-18T08:06:00
-CPU Load Server2,92.7,cpu_load,Secondary app server CPU,85.0,2026-04-18T08:07:00
-Humidity Sensor B,55.0,humidity,Data center humidity,90.0,2026-04-18T08:08:00
-Memory Usage App,60.4,memory_usage,App server memory,90.0,2026-04-18T08:09:00
-Network IO Switch1,150.8,network_io,Core switch throughput Mbps,950.0,2026-04-18T08:10:00
-Temperature Sensor C,35.2,temperature,Office temperature,80.0,2026-04-18T08:11:00
-CPU Load Server1,55.9,cpu_load,Primary web server CPU,85.0,2026-04-18T08:12:00
-Pressure Gauge P2,1015.0,pressure,Secondary pressure gauge,,2026-04-18T08:13:00
-Memory Usage Cache,88.3,memory_usage,Cache server memory,90.0,2026-04-18T08:14:00
-Network IO Router1,980.1,network_io,Core router throughput Mbps,950.0,2026-04-18T08:15:00
-Temperature Sensor A,76.4,temperature,Server room temperature,80.0,2026-04-18T08:16:00
-CPU Load Server3,30.1,cpu_load,Backup server CPU,85.0,2026-04-18T08:17:00
-Humidity Sensor C,72.5,humidity,Storage room humidity,90.0,2026-04-18T08:18:00
-Memory Usage DB,91.2,memory_usage,Database server memory,90.0,2026-04-18T08:19:00
+Sensor temperature 0,34.28,temperature,,105.63,2026-04-15T00:00:00
+Sensor humidity 1,66.54,humidity,,97.16,2026-04-15T01:00:00
+Sensor pressure 2,83.24,pressure,,83.68,2026-04-15T02:00:00
+Sensor cpu_load 3,32.47,cpu_load,,109.36,2026-04-15T03:00:00
+Sensor memory_usage 4,89.05,memory_usage,,80.71,2026-04-15T04:00:00
+Sensor network_io 5,59.33,network_io,,114.34,2026-04-15T05:00:00
+Sensor temperature 6,69.2,temperature,,80.55,2026-04-15T06:00:00
+Sensor humidity 7,79.57,humidity,,105.12,2026-04-15T07:00:00
+Sensor pressure 8,98.25,pressure,,99.72,2026-04-15T08:00:00
+Sensor cpu_load 9,21.35,cpu_load,,105.19,2026-04-15T09:00:00
+Sensor memory_usage 10,42.91,memory_usage,,91.65,2026-04-15T10:00:00
+Sensor network_io 11,21.29,network_io,,81.27,2026-04-15T11:00:00
+Sensor temperature 12,68.86,temperature,,88.36,2026-04-15T12:00:00
+Sensor humidity 13,22.77,humidity,,102.24,2026-04-15T13:00:00
+Sensor pressure 14,87.23,pressure,,91.11,2026-04-15T14:00:00
+Sensor cpu_load 15,52.17,cpu_load,,88.01,2026-04-15T15:00:00
+Sensor memory_usage 16,48.1,memory_usage,,85.0,2026-04-15T16:00:00
+Sensor network_io 17,97.77,network_io,,97.39,2026-04-15T17:00:00
+Sensor temperature 18,19.82,temperature,,118.17,2026-04-15T18:00:00
+Sensor humidity 19,62.05,humidity,,95.05,2026-04-15T19:00:00
+Sensor pressure 20,49.77,pressure,,111.8,2026-04-15T20:00:00
+Sensor cpu_load 21,46.31,cpu_load,,97.34,2026-04-15T21:00:00
+Sensor memory_usage 22,23.18,memory_usage,,104.47,2026-04-15T22:00:00
+Sensor network_io 23,48.87,network_io,,104.4,2026-04-15T23:00:00
+Sensor temperature 24,98.45,temperature,,114.19,2026-04-16T00:00:00
+Sensor humidity 25,95.33,humidity,,105.14,2026-04-16T01:00:00
+Sensor pressure 26,59.81,pressure,,110.35,2026-04-16T02:00:00
+Sensor cpu_load 27,24.75,cpu_load,,105.81,2026-04-16T03:00:00
+Sensor memory_usage 28,90.14,memory_usage,,89.67,2026-04-16T04:00:00
+Sensor network_io 29,11.93,network_io,,108.46,2026-04-16T05:00:00
+Sensor temperature 30,24.34,temperature,,90.56,2026-04-16T06:00:00
+Sensor humidity 31,12.69,humidity,,94.54,2026-04-16T07:00:00
+Sensor pressure 32,69.12,pressure,,96.93,2026-04-16T08:00:00
+Sensor cpu_load 33,60.23,cpu_load,,83.67,2026-04-16T09:00:00
+Sensor memory_usage 34,92.28,memory_usage,,111.18,2026-04-16T10:00:00
+Sensor network_io 35,79.96,network_io,,111.97,2026-04-16T11:00:00
+Sensor temperature 36,78.19,temperature,,89.36,2026-04-16T12:00:00
+Sensor humidity 37,72.14,humidity,,119.49,2026-04-16T13:00:00
+Sensor pressure 38,80.08,pressure,,85.95,2026-04-16T14:00:00
+Sensor cpu_load 39,62.42,cpu_load,,97.63,2026-04-16T15:00:00
+Sensor memory_usage 40,64.32,memory_usage,,89.62,2026-04-16T16:00:00
+Sensor network_io 41,15.92,network_io,,95.89,2026-04-16T17:00:00
+Sensor temperature 42,56.71,temperature,,112.08,2026-04-16T18:00:00
+Sensor humidity 43,57.44,humidity,,108.06,2026-04-16T19:00:00
+Sensor pressure 44,66.88,pressure,,90.93,2026-04-16T20:00:00
+Sensor cpu_load 45,28.15,cpu_load,,116.22,2026-04-16T21:00:00
+Sensor memory_usage 46,59.6,memory_usage,,95.58,2026-04-16T22:00:00
+Sensor network_io 47,59.13,network_io,,105.11,2026-04-16T23:00:00
+Sensor temperature 48,48.87,temperature,,114.8,2026-04-17T00:00:00
+Sensor humidity 49,46.29,humidity,,101.96,2026-04-17T01:00:00
+Sensor pressure 50,99.89,pressure,,89.27,2026-04-17T02:00:00
+Sensor cpu_load 51,20.84,cpu_load,,80.57,2026-04-17T03:00:00
+Sensor memory_usage 52,95.05,memory_usage,,108.81,2026-04-17T04:00:00
+Sensor network_io 53,75.58,network_io,,104.26,2026-04-17T05:00:00
+Sensor temperature 54,84.16,temperature,,119.2,2026-04-17T06:00:00
+Sensor humidity 55,32.25,humidity,,108.19,2026-04-17T07:00:00
+Sensor pressure 56,34.0,pressure,,94.09,2026-04-17T08:00:00
+Sensor cpu_load 57,61.37,cpu_load,,88.44,2026-04-17T09:00:00
+Sensor memory_usage 58,63.96,memory_usage,,88.86,2026-04-17T10:00:00
+Sensor network_io 59,19.12,network_io,,111.09,2026-04-17T11:00:00
+Sensor temperature 60,44.15,temperature,,83.52,2026-04-17T12:00:00
+Sensor humidity 61,97.09,humidity,,111.44,2026-04-17T13:00:00
+Sensor pressure 62,24.36,pressure,,119.02,2026-04-17T14:00:00
+Sensor cpu_load 63,13.28,cpu_load,,83.77,2026-04-17T15:00:00
+Sensor memory_usage 64,88.89,memory_usage,,85.95,2026-04-17T16:00:00
+Sensor network_io 65,12.2,network_io,,113.59,2026-04-17T17:00:00
+Sensor temperature 66,67.54,temperature,,118.48,2026-04-17T18:00:00
+Sensor humidity 67,25.08,humidity,,89.2,2026-04-17T19:00:00
+Sensor pressure 68,71.99,pressure,,87.33,2026-04-17T20:00:00
+Sensor cpu_load 69,43.87,cpu_load,,118.72,2026-04-17T21:00:00
+Sensor memory_usage 70,82.5,memory_usage,,94.37,2026-04-17T22:00:00
+Sensor network_io 71,39.27,network_io,,83.61,2026-04-17T23:00:00
+Sensor temperature 72,95.43,temperature,,98.84,2026-04-18T00:00:00
+Sensor humidity 73,35.34,humidity,,90.48,2026-04-18T01:00:00
+Sensor pressure 74,87.01,pressure,,105.6,2026-04-18T02:00:00
+Sensor cpu_load 75,41.58,cpu_load,,118.25,2026-04-18T03:00:00
+Sensor memory_usage 76,43.46,memory_usage,,112.6,2026-04-18T04:00:00
+Sensor network_io 77,77.83,network_io,,117.91,2026-04-18T05:00:00
+Sensor temperature 78,77.95,temperature,,116.2,2026-04-18T06:00:00
+Sensor humidity 79,89.87,humidity,,117.76,2026-04-18T07:00:00
+Sensor pressure 80,86.26,pressure,,83.25,2026-04-18T08:00:00
+Sensor cpu_load 81,54.44,cpu_load,,103.56,2026-04-18T09:00:00
+Sensor memory_usage 82,87.41,memory_usage,,108.99,2026-04-18T10:00:00
+Sensor network_io 83,36.43,network_io,,80.79,2026-04-18T11:00:00
+Sensor temperature 84,86.45,temperature,,108.01,2026-04-18T12:00:00
+Sensor humidity 85,78.28,humidity,,90.32,2026-04-18T13:00:00
+Sensor pressure 86,87.76,pressure,,104.11,2026-04-18T14:00:00
+Sensor cpu_load 87,84.68,cpu_load,,110.26,2026-04-18T15:00:00
+Sensor memory_usage 88,85.98,memory_usage,,104.38,2026-04-18T16:00:00
+Sensor network_io 89,50.46,network_io,,114.07,2026-04-18T17:00:00
+Sensor temperature 90,14.17,temperature,,118.26,2026-04-18T18:00:00
+Sensor humidity 91,53.36,humidity,,112.77,2026-04-18T19:00:00
+Sensor pressure 92,23.38,pressure,,87.2,2026-04-18T20:00:00
+Sensor cpu_load 93,66.7,cpu_load,,84.91,2026-04-18T21:00:00
+Sensor memory_usage 94,12.77,memory_usage,,95.37,2026-04-18T22:00:00
+Sensor network_io 95,73.3,network_io,,118.85,2026-04-18T23:00:00
+Sensor temperature 96,86.07,temperature,,117.58,2026-04-19T00:00:00
+Sensor humidity 97,74.38,humidity,,98.78,2026-04-19T01:00:00
+Sensor pressure 98,96.09,pressure,,86.22,2026-04-19T02:00:00
+Sensor cpu_load 99,12.8,cpu_load,,88.12,2026-04-19T03:00:00
+Sensor memory_usage 100,32.39,memory_usage,,104.33,2026-04-19T04:00:00
+Sensor network_io 101,64.39,network_io,,81.56,2026-04-19T05:00:00
+Sensor temperature 102,87.25,temperature,,100.6,2026-04-19T06:00:00
+Sensor humidity 103,88.41,humidity,,92.51,2026-04-19T07:00:00
+Sensor pressure 104,94.73,pressure,,112.79,2026-04-19T08:00:00
+Sensor cpu_load 105,31.92,cpu_load,,102.71,2026-04-19T09:00:00
+Sensor memory_usage 106,53.11,memory_usage,,119.59,2026-04-19T10:00:00
+Sensor network_io 107,29.93,network_io,,116.65,2026-04-19T11:00:00
+Sensor temperature 108,59.09,temperature,,80.16,2026-04-19T12:00:00
+Sensor humidity 109,74.66,humidity,,81.35,2026-04-19T13:00:00
+Sensor pressure 110,45.61,pressure,,81.63,2026-04-19T14:00:00
+Sensor cpu_load 111,32.34,cpu_load,,92.39,2026-04-19T15:00:00
+Sensor memory_usage 112,94.78,memory_usage,,96.62,2026-04-19T16:00:00
+Sensor network_io 113,76.79,network_io,,108.63,2026-04-19T17:00:00
+Sensor temperature 114,75.34,temperature,,85.03,2026-04-19T18:00:00
+Sensor humidity 115,20.99,humidity,,95.93,2026-04-19T19:00:00
+Sensor pressure 116,45.37,pressure,,117.89,2026-04-19T20:00:00
+Sensor cpu_load 117,28.95,cpu_load,,109.28,2026-04-19T21:00:00
+Sensor memory_usage 118,86.89,memory_usage,,96.25,2026-04-19T22:00:00
+Sensor network_io 119,80.52,network_io,,86.57,2026-04-19T23:00:00
