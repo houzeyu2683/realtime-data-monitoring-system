@@ -6,12 +6,15 @@
 
 詳細架構圖請見 [docs/architecture.md](docs/architecture.md)
 
-```
-┌─────────────────┐     REST API      ┌──────────────────┐     asyncmy     ┌──────────────┐
-│  Streamlit      │ ────────────────► │  FastAPI         │ ───────────────► │  MariaDB     │
-│  Frontend       │                   │  Backend         │                  │  11.7        │
-│  :8501          │ ◄──── WebSocket ── │  :8000           │                  │  :3306       │
-└─────────────────┘                   └──────────────────┘                  └──────────────┘
+```mermaid
+graph LR
+    FE["Streamlit Frontend\n:8501"]
+    BE["FastAPI Backend\n:8000"]
+    DB[("MariaDB 11.7\n:3306")]
+
+    FE -->|REST API| BE
+    BE -->|WebSocket| FE
+    BE -->|asyncmy / ORM| DB
 ```
 
 ## 技術棧
