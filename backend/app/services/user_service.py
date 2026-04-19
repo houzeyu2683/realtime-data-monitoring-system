@@ -55,6 +55,11 @@ async def update_user(db: AsyncSession, user: User, payload: UserUpdate) -> User
     return user
 
 
+async def delete_user(db: AsyncSession, user: User) -> None:
+    await db.delete(user)
+    await db.commit()
+
+
 async def authenticate_user(db: AsyncSession, username: str, password: str) -> Optional[User]:
     user = await get_user_by_username(db, username)
     if not user or not verify_password(password, user.hashed_password):
