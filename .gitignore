@@ -1,5 +1,6 @@
 .env
 .summary/
+CLAUDE.md
 __pycache__/
 *.pyc
 *.pyo
