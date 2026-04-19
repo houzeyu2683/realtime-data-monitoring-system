@@ -115,4 +115,4 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ACCESS_TOKEN_EXPIRE_MINUTES: "60"
         run: |
-          pytest tests/test_auth.py tests/test_users.py tests/test_data.py tests/test_analytics.py tests/test_admin.py tests/test_websocket.py -v --tb=short
+          pytest tests/test_auth.py tests/test_users.py tests/test_data.py tests/test_analytics.py tests/test_admin.py tests/test_websocket.py -v --tb=short --cov=app --cov-report=xml --cov-report=term-missing
