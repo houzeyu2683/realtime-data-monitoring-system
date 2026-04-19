@@ -13,7 +13,14 @@ from app.services import log_service, user_service
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
-@router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/register",
+    response_model=UserResponse,
+    status_code=status.HTTP_201_CREATED,
+    responses={
+        409: {"description": "Username or email already taken"},
+    },
+)
 async def register(
     payload: UserCreate,
     request: Request,
@@ -32,7 +39,14 @@ async def register(
     return UserResponse.model_validate(user)
 
 
-@router.post("/login", response_model=TokenResponse)
+@router.post(
+    "/login",
+    response_model=TokenResponse,
+    responses={
+        401: {"description": "Invalid credentials"},
+        403: {"description": "Account disabled"},
+    },
+)
 async def login(
     payload: UserLogin,
     request: Request,
@@ -52,6 +66,12 @@ async def login(
     return TokenResponse(access_token=token)
 
 
-@router.get("/me", response_model=UserResponse)
+@router.get(
+    "/me",
+    response_model=UserResponse,
+    responses={
+        401: {"description": "Invalid or expired token"},
+    },
+)
 async def get_me(current_user: Annotated[User, Depends(get_current_user)]) -> UserResponse:
     return UserResponse.model_validate(current_user)

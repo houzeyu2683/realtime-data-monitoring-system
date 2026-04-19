@@ -16,7 +16,13 @@ from app.services import analytics_service, data_service
 router = APIRouter(prefix="/analytics", tags=["analytics"])
 
 
-@router.get("/", response_model=AnalyticsResponse)
+@router.get(
+    "/",
+    response_model=AnalyticsResponse,
+    responses={
+        401: {"description": "Invalid or expired token"},
+    },
+)
 async def get_analytics(
     _: Annotated[User, Depends(get_current_user)],
     db: Annotated[AsyncSession, Depends(get_db)],
@@ -31,7 +37,12 @@ async def get_analytics(
     return AnalyticsResponse(summary=summary, categories=categories, trend=trend)
 
 
-@router.get("/export/excel")
+@router.get(
+    "/export/excel",
+    responses={
+        401: {"description": "Invalid or expired token"},
+    },
+)
 async def export_excel(
     _: Annotated[User, Depends(get_current_user)],
     db: Annotated[AsyncSession, Depends(get_db)],

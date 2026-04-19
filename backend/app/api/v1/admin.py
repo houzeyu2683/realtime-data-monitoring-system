@@ -15,7 +15,13 @@ from app.services import log_service
 router = APIRouter(prefix="/admin", tags=["admin"])
 
 
-@router.get("/logs", response_model=SystemLogListResponse)
+@router.get(
+    "/logs",
+    response_model=SystemLogListResponse,
+    responses={
+        403: {"description": "Admin only"},
+    },
+)
 async def get_logs(
     _: Annotated[User, Depends(require_admin)],
     db: Annotated[AsyncSession, Depends(get_db)],
@@ -31,7 +37,12 @@ async def get_logs(
     )
 
 
-@router.get("/db-status")
+@router.get(
+    "/db-status",
+    responses={
+        403: {"description": "Admin only"},
+    },
+)
 async def db_status(
     _: Annotated[User, Depends(require_admin)],
     db: Annotated[AsyncSession, Depends(get_db)],

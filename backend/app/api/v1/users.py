@@ -12,7 +12,13 @@ from app.services import user_service
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.get("/", response_model=list[UserResponse])
+@router.get(
+    "/",
+    response_model=list[UserResponse],
+    responses={
+        403: {"description": "Admin only"},
+    },
+)
 async def list_users(
     _: Annotated[User, Depends(require_admin)],
     db: Annotated[AsyncSession, Depends(get_db)],
@@ -21,7 +27,14 @@ async def list_users(
     return [UserResponse.model_validate(u) for u in users]
 
 
-@router.get("/{user_id}", response_model=UserResponse)
+@router.get(
+    "/{user_id}",
+    response_model=UserResponse,
+    responses={
+        403: {"description": "Cannot access other user's data"},
+        404: {"description": "User not found"},
+    },
+)
 async def get_user(
     user_id: int,
     current_user: Annotated[User, Depends(get_current_user)],
@@ -36,7 +49,14 @@ async def get_user(
     return UserResponse.model_validate(user)
 
 
-@router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete(
+    "/{user_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    responses={
+        403: {"description": "Admin only"},
+        404: {"description": "User not found"},
+    },
+)
 async def delete_user(
     user_id: int,
     _: Annotated[User, Depends(require_admin)],
@@ -48,7 +68,14 @@ async def delete_user(
     await user_service.delete_user(db, user)
 
 
-@router.patch("/{user_id}", response_model=UserResponse)
+@router.patch(
+    "/{user_id}",
+    response_model=UserResponse,
+    responses={
+        403: {"description": "Cannot modify other user or change role without admin"},
+        404: {"description": "User not found"},
+    },
+)
 async def update_user(
     user_id: int,
     payload: UserUpdate,

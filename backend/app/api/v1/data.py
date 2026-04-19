@@ -17,7 +17,14 @@ from app.services import data_service
 router = APIRouter(prefix="/data", tags=["data"])
 
 
-@router.post("/", response_model=DataRecordResponse, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/",
+    response_model=DataRecordResponse,
+    status_code=status.HTTP_201_CREATED,
+    responses={
+        403: {"description": "Viewer role cannot create records"},
+    },
+)
 async def create_record(
     payload: DataRecordCreate,
     current_user: Annotated[User, Depends(require_editor)],
@@ -27,7 +34,13 @@ async def create_record(
     return DataRecordResponse.model_validate(record)
 
 
-@router.get("/", response_model=DataRecordListResponse)
+@router.get(
+    "/",
+    response_model=DataRecordListResponse,
+    responses={
+        401: {"description": "Invalid or expired token"},
+    },
+)
 async def list_records(
     _: Annotated[User, Depends(get_current_user)],
     db: Annotated[AsyncSession, Depends(get_db)],
@@ -53,7 +66,13 @@ async def list_records(
     )
 
 
-@router.get("/{record_id}", response_model=DataRecordResponse)
+@router.get(
+    "/{record_id}",
+    response_model=DataRecordResponse,
+    responses={
+        404: {"description": "Record not found"},
+    },
+)
 async def get_record(
     record_id: int,
     _: Annotated[User, Depends(get_current_user)],
@@ -65,7 +84,14 @@ async def get_record(
     return DataRecordResponse.model_validate(record)
 
 
-@router.patch("/{record_id}", response_model=DataRecordResponse)
+@router.patch(
+    "/{record_id}",
+    response_model=DataRecordResponse,
+    responses={
+        403: {"description": "Not the owner of this record"},
+        404: {"description": "Record not found"},
+    },
+)
 async def update_record(
     record_id: int,
     payload: DataRecordUpdate,
@@ -81,7 +107,14 @@ async def update_record(
     return DataRecordResponse.model_validate(updated)
 
 
-@router.delete("/{record_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete(
+    "/{record_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    responses={
+        403: {"description": "Not the owner of this record"},
+        404: {"description": "Record not found"},
+    },
+)
 async def delete_record(
     record_id: int,
     current_user: Annotated[User, Depends(require_editor)],
@@ -95,7 +128,14 @@ async def delete_record(
     await data_service.delete_record(db, record)
 
 
-@router.post("/import/csv", status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/import/csv",
+    status_code=status.HTTP_201_CREATED,
+    responses={
+        403: {"description": "Viewer role cannot import records"},
+        422: {"description": "Invalid CSV format"},
+    },
+)
 async def import_csv(
     file: Annotated[UploadFile, File()],
     current_user: Annotated[User, Depends(require_editor)],
@@ -108,7 +148,14 @@ async def import_csv(
     return {"imported": count}
 
 
-@router.post("/import/json", status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/import/json",
+    status_code=status.HTTP_201_CREATED,
+    responses={
+        403: {"description": "Viewer role cannot import records"},
+        422: {"description": "Invalid JSON format"},
+    },
+)
 async def import_json(
     file: Annotated[UploadFile, File()],
     current_user: Annotated[User, Depends(require_editor)],
