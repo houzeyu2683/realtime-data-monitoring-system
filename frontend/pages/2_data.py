@@ -18,7 +18,10 @@ tab_list, tab_create, tab_import = st.tabs(["資料列表", "新增資料", "批
 with tab_list:
     col1, col2, col3 = st.columns(3)
     with col1:
-        category_filter = st.text_input("分類篩選", key="list_cat")
+        category_options = ["全部", "temperature", "humidity", "pressure", "cpu_load", "memory_usage", "network_io", "custom"]
+        category_filter = st.selectbox("分類篩選", category_options, key="list_cat")
+        if category_filter == "全部":
+            category_filter = ""
     with col2:
         sort_by = st.selectbox("排序欄位", ["timestamp", "value", "category", "title"])
     with col3:

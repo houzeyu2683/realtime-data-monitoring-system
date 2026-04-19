@@ -1,3 +1,4 @@
+import asyncio
 import pytest
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
@@ -10,6 +11,7 @@ from app.db.base import Base
 from app.db.session import get_db
 from app.main import app
 from app.models.user import User, UserRole
+from app.websocket.simulator import run_simulator
 
 TEST_DATABASE_URL = "mysql+asyncmy://monitor_user:monitor_pass@localhost:3306/monitoring_test"
 
@@ -58,8 +60,10 @@ async def ws_client(session_factory) -> AsyncClient:
             yield session
 
     app.dependency_overrides[get_db] = _override
+    task = asyncio.create_task(run_simulator())
     async with AsyncClient(transport=ASGIWebSocketTransport(app=app), base_url="ws://test") as c:
         yield c
+    task.cancel()
     app.dependency_overrides.clear()
 
 

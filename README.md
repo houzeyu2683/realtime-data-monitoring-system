@@ -4,6 +4,8 @@
 
 ## 系統架構
 
+詳細架構圖請見 [docs/architecture.md](docs/architecture.md)
+
 ```
 ┌─────────────────┐     REST API      ┌──────────────────┐     asyncmy     ┌──────────────┐
 │  Streamlit      │ ────────────────► │  FastAPI         │ ───────────────► │  MariaDB     │

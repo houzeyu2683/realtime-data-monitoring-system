@@ -1,6 +1,6 @@
 import streamlit as st
 
-from utils.auth import do_login, do_logout, get_current_user, is_logged_in, register
+from utils.auth import do_login, do_logout, get_current_user, is_logged_in
 
 st.set_page_config(page_title="監控系統", page_icon="📊", layout="wide")
 

@@ -1,11 +1,13 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, Query
-from sqlalchemy import text
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import require_admin
 from app.db.session import get_db
+from app.models.data_record import DataRecord
+from app.models.system_log import SystemLog
 from app.models.user import User
 from app.schemas.system_log import SystemLogListResponse, SystemLogResponse
 from app.services import log_service
@@ -34,12 +36,15 @@ async def db_status(
     _: Annotated[User, Depends(require_admin)],
     db: Annotated[AsyncSession, Depends(get_db)],
 ) -> dict:
-    result = await db.execute(text("SELECT VERSION()"))
-    version = result.scalar_one()
+    version = (await db.execute(select(func.version()))).scalar_one()
 
-    tables_result = await db.execute(
-        text("SELECT table_name, table_rows FROM information_schema.tables WHERE table_schema = DATABASE()")
-    )
-    tables = [{"table": row[0], "rows": row[1]} for row in tables_result.all()]
+    tables = []
+    for model, name in [
+        (User, "users"),
+        (DataRecord, "data_records"),
+        (SystemLog, "system_logs"),
+    ]:
+        count = (await db.execute(select(func.count()).select_from(model))).scalar_one()
+        tables.append({"table": name, "rows": count})
 
     return {"db_version": version, "tables": tables}
